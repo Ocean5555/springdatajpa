@@ -6,14 +6,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Optional;
 
 /**
  * Created by Ocean on 2019/3/6 15:16.
  */
-@Controller
+@RestController
 @RequestMapping("/dept")
 public class DeptController {
 
@@ -21,7 +23,6 @@ public class DeptController {
     private DeptRepository deptRepository;
 
     @RequestMapping("/{id}")
-    @ResponseBody
     public Dept findById(@PathVariable("id") Integer id ){
         Dept dept = null;
         Optional<Dept> optional = deptRepository.findById(id);
@@ -32,8 +33,7 @@ public class DeptController {
         return dept;
     }
 
-    @RequestMapping("create")
-    @ResponseBody
+    @RequestMapping("/create")
     public Dept create(){
         Dept dept = new Dept();
         dept.setdName("tranning");
@@ -41,4 +41,12 @@ public class DeptController {
         deptRepository.save(dept);
         return dept;
     }
+
+    @RequestMapping("/findByDname")
+    public List<Dept> findByDName(String dName){
+        List<Dept> depts = deptRepository.findDepts(dName);
+        return depts;
+    }
+
+
 }

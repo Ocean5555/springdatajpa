@@ -1,6 +1,8 @@
 package com.ocean.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Ocean on 2019/3/6 14:44.
@@ -16,6 +18,9 @@ public class Dept {
     private String dName;
     @Column(name = "loc")
     private String localtion;
+    /*@OneToMany           //效率差，会形成死循环
+    @JoinColumn(name = "deptno")
+    private List<Emp> emps = new ArrayList<>();*/
 
     public Integer getDeptNo() {
         return deptNo;
